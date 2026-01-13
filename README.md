@@ -35,28 +35,6 @@ The project also includes:
 - Fetch API for communicating with server  
 - Display data in browser  
 
-## Project Structure
-
-rdbms/
-│
-├── server/
-│ ├── index.js # Express server entry point
-│ ├── repl.js # Interactive SQL-like REPL
-│ ├── db/
-│ │ ├── database.js # Database manager
-│ │ ├── table.js # Table logic (CSV load/save)
-│ │ └── parser.js # SQL-like command parser
-│ └── data/
-│ └── users.csv # CSV database file
-│
-├── client/
-│ ├── index.html # Frontend UI
-│ └── app.js # Frontend logic
-│
-├── .gitignore
-├── package.json
-└── README.md
-
 ## Technologies Used
 
 - Node.js 
@@ -68,10 +46,10 @@ rdbms/
 
 ## Installation & Setup
 
-### 1️ Clone the repository
+### 1 Clone the repository
 
 ```bash
-git clone git@github.com:HWaruguru/rdbms.git
+git clone https://github.com/HWaruguru/rdbms.git
 cd rdbms
 ```
 
@@ -82,6 +60,7 @@ npm install
 ```
 
 ### 3 Project configuration
+- Ensure package.json contains:
 ```json
 {
   "type": "module",
@@ -116,26 +95,29 @@ npm run dev
 ```bash
 Server running on port 3000
 ```
+
 ## API Usage
 ### Get all users
 ```bash
 curl http://localhost:3000/users
 ```
+
 ### Insert a user
 ```bash
 curl -X POST http://localhost:3000/users \
 -H "Content-Type: application/json" \
--d '{"id":"3","name":"Charlie","email":"charlie@test.com"}'
+-d '{"id":"3","name":"Kev","email":"kev@gmail.com"}'
 ```
-## SQL-like REPL
-- The project includes an interactive REPL for executing SQL-like commands.
-### Start REPL
 
+## SQL-like REPL
+- The project includes an interactive REPL for executing SQL-like commands
+
+### Start REPL
 ```bash 
 cd server
 node repl.js
 ```
-- Prompt 
+- Prompt:
 ```shell
 rdbms>
 ```
@@ -146,8 +128,8 @@ SELECT * FROM users
 INSERT INTO users VALUES (4,Daudi,daudi@gmail.com)
 ```
 ### Exit REPL
-- Ctrl + C
-- or exit
+- quit
+- or Ctrl + C
 
 ## Client Application
 ### Running the Client
@@ -160,11 +142,11 @@ Open the provided URL in the browser.
 
 - Fetch records from the database
 - Display results in the browser
-- Communicate with the server using Fetch API
+- Communicate with the server using fetch API
 
 ### CORS Handling
 CORS is enabled in the Express server to allow browser access:
 
-```json
+```js
 app.use(cors());
 ```
