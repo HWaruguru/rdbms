@@ -9,7 +9,10 @@ export function parse(sql) {
 
     if (command === "INSERT") {
         const table = tokens[2]
-        const values = sql.match(/\((.*?)\)/)[1].split(",")
+        const values = sql
+            .match(/\((.*?)\)/)[1]
+            .split(",")
+            .map(v => v.trim());
         return { type: "INSERT", table, values }
     }
     throw new Error("Unknown SQL command")

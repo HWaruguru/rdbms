@@ -22,10 +22,19 @@ export class Table {
         ].join("\n")
         fs.writeFileSync(this.filePath, csv)
     }
+    
     insert(values) {
-        this.rows.push(values)
-        this.save()
+        const idIndex = this.headers.indexOf("id");
+
+        const exists = this.rows.some(row => row[idIndex] === values[idIndex]);
+        if (exists) {
+            throw new Error("Duplicate ID not allowed");
+        }
+
+        this.rows.push(values);
+        this.save();
     }
+
 
     selectAll() {
         return this.rows.map(row => Object.fromEntries(this.headers.map((h, i) => [h, row[i]]))
